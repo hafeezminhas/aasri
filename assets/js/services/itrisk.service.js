@@ -17,7 +17,7 @@
         };
 
         this.AddRim = function(params){
-            return APIHandler.post('itrisk/itrim', params);
+            return APIHandler.Post('itrisk/itrim', params);
         };
 
         this.GetRimPeriod = function(){
@@ -37,7 +37,7 @@
         };
 
         this.UpdateRim = function(id, params){
-            return APIHandler.Put('itrisk/itrim'+id, params);
+            return APIHandler.Put('itrisk/itrim/'+id, params);
         };
 
         this.LoadAPIRoutes = function(){

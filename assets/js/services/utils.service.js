@@ -4,6 +4,20 @@ app.service('Utils', function($q, $http, $uibModal){
         console.error("This Error has occured", err);
     };
 
+    /*
+    *  --- Start: Random Colors and Integers Functions
+    */
+
+    function randomRGBComponent() {
+        return Math.round(Math.random() * 255);
+    }
+
+    this.RandomRGBColor = function () {
+        return 'rgb(' + randomRGBComponent() + ', ' + randomRGBComponent() + ', ' + randomRGBComponent() + ')';
+    };
+
+    /* ----------- End ------------ */
+
     this.camelizeString = function(inStr){
         var str = inStr.replace(/[_-]/g, " "), result = [];
         str = str.split(' ');
@@ -12,6 +26,15 @@ app.service('Utils', function($q, $http, $uibModal){
         });
         result = result.join(' ');
         return result;
+    };
+
+    this.CapitalizeFirstLetter = function (str) {
+        if(!str || !str.length) return false;
+        str = str.split('');
+        str[0] = str[0].toUpperCase();
+        str = str.join('');
+
+        return str;
     };
 
     this.removeLastWord = function(str){
@@ -27,6 +50,24 @@ app.service('Utils', function($q, $http, $uibModal){
         result.setDate(dtObj.dayOfMonth);
 
         return result;
+    };
+
+    this.GetMonthIndex = function(month){
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        return months.indexOf(month);
+    };
+
+    this.GetLast12Month = function(offset){
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        months = months.concat(months);
+        var currMonth  = (new Date()).getUTCMonth();
+        var result = [];
+        var start = currMonth+12, end = start-offset;
+        for(var i=start; i>=end; i--){
+            result.push(months[Math.abs(i)]);
+        }
+
+        return result.reverse();
     };
 
     this.GetDPDate = function(dt){
@@ -52,6 +93,31 @@ app.service('Utils', function($q, $http, $uibModal){
                             Ok: ok,
                             Cancel: cancel
                         }
+                    };
+                }
+            }
+        });
+    };
+
+    this.ShowNotification = function (title, message, type) {
+
+        var types = {
+            info: 'fa-info-circle',
+            error: 'fa-times',
+            warning: 'fa-alert'
+        };
+
+        var notification =  $uibModal.open({
+            templateUrl: 'notification.tpl.html',
+            controller: 'NotificationCtrl',
+            size: 'md',
+            resolve: {
+                items: function () {
+                    return {
+                        Title: title,
+                        Message: message,
+                        Icon: types[type],
+                        Type: type
                     };
                 }
             }

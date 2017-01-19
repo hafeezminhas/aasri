@@ -37,7 +37,7 @@
             confirmation.result.then(function () {
                 console.log("U chose Yes");
                 $rootScope.app.Mask = true;
-                OPRiskService.DeleteRisk(r.id).then(function(data){
+                OPRiskService.DeleteIncident(r.id).then(function(data){
                     if(data.status===200) loadRisksList();
                 });
             });
@@ -65,7 +65,9 @@
 
         function loadRisksList(next) {
             OPRiskService.LoadOpRiskList().then(function(data) {
-                data.forEach(function(r){ r.IDate = Utils.createDate(r.identifiedDate); });
+                data.forEach(function(r){
+                    if(r.identifiedDate) r.identifiedDate = new Date(r.identifiedDate);
+                });
                 $scope.Risks = data;
                 if(next) next();
                 $rootScope.app.Mask = false;

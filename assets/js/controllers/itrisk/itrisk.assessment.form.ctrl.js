@@ -13,7 +13,6 @@
             approval: "",
             asmntType: "",
             asmntTypeName: "",
-            asmntType_name: "",
             assessDesc: "",
             assessId: 0,
             assessName: "",
@@ -24,7 +23,6 @@
             filemodel: [],
             filename: "",
             frequency: "",
-            id: "",
             modifiedBy: "",
             modifiedOn: "",
             period: "",
@@ -32,6 +30,7 @@
             region: "",
             resPerson: ""
         };
+
 
         $scope.submitAction = function(){
             if($scope.Form.ITRAM.$invalid) return false;

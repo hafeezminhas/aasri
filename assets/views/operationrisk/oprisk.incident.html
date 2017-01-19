@@ -64,7 +64,7 @@
 							<tr class="sortable-headers">
 								<th><input type="checkbox"></th>
 								<th><a ng-class="{'text-azure': CurrCol==='rcsa_name' }" ng-click="sortMe('rcsa_name')"><i class="fa {{resSort('rcsa_name')}}"></i> Name</a></th>
-								<th><a ng-class="{'text-azure': CurrCol==='IDate' }" ng-click="sortMe('IDate')"><i class="fa {{resSort('IDate')}}"></i> Identified Date</a></th>
+								<th><a ng-class="{'text-azure': CurrCol==='identifiedDate' }" ng-click="sortMe('identifiedDate')"><i class="fa {{resSort('identifiedDate')}}"></i> Identified Date</a></th>
 								<th><a ng-class="{'text-azure': CurrCol==='riskSeverity' }" ng-click="sortMe('riskSeverity')"><i class="fa {{resSort('riskSeverity')}}"></i> Severity</a></th>
 								<th><a ng-class="{'text-azure': CurrCol==='rcsaStatus' }" ng-click="sortMe('rcsaStatus')"><i class="fa {{resSort('rcsaStatus')}}"></i> Status</a></th>
 								<th><a ng-class="{'text-azure': CurrCol==='riskCategory' }" ng-click="sortMe('riskCategory')"><i class="fa {{resSort('riskCategory')}}"></i> RiskCategory</a></th>
@@ -75,7 +75,7 @@
 							<tr ng-repeat="r in Risks | orderBy: CurrCol:IsAsc  | filter: CurrFilt">
 								<th><input type="checkbox"></th>
 								<td>{{r.rcsaName}}</td>
-								<td>{{r.IDate | date}}</td>
+								<td>{{r.identifiedDate | date}}</td>
 								<td>{{r.riskSeverity}}</td>
 								<td>{{r.rcsaStatus}}</td>
 								<td>{{r.riskCategory}}</td>

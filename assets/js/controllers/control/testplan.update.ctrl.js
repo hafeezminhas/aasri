@@ -27,19 +27,19 @@
         };
 
         $scope.submitAction = function() {
-            if($scope.Form.CtrlRepo.$invalid) return false;
-            ControlService.UpdateTestPlans($stateParams, $scope.VM).then(function (res) {
-                if(res.status===200) $state.go('app.control.teestplan.main');
+            if($scope.Form.TestPlan.$invalid) return false;
+            $scope.VM.id = "5523acf309f393eb68b4a943";
+            ControlService.UpdateTestPlans($stateParams.id, $scope.VM).then(function (res) {
+                if(res.status===200) $state.go('app.control.testplan.main');
             });
         };
 
         $scope.cancelAction = function() {
-            if($scope.Form.CtrlRepo.$dirty) {
+            if($scope.Form.TestPlan.$dirty) {
                 var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
                 confirm.result.then(function(){ $state.go('app.control.testplan.main'); });
                 return false;
             }
-            $state.go('app.control.testplan.main');
         };
 
         ControlService.GetTestPlan($stateParams.id).then(function(data){

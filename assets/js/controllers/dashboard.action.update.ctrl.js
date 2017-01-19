@@ -12,36 +12,34 @@
         $scope.Form = {};
 
         $scope.submitAction = function() {
-            if($scope.Form.CtrlRepo.$invalid) return false;
-            ControlService.UpdateTestPlans($stateParams, $scope.VM).then(function (res) {
-                if(res.status===200) $state.go('app.control.teestplan.main');
+            if($scope.Form.Audit.$invalid) return false;
+            AuditService.ReviewAction($stateParams, $scope.Action).then(function (res) {
+                if(res.status===200) $state.go('app.dashboard.main');
             });
         };
 
         $scope.cancelAction = function() {
-            if($scope.Form.CtrlRepo.$dirty) {
+            if($scope.Form.Audit.$dirty) {
                 var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
-                confirm.result.then(function(){ $state.go('app.dashboard'); });
+                confirm.result.then(function(){ $state.go('app.dashboard.main'); });
                 return false;
             }
             $state.go('app.dashboard');
         };
 
-        $scope.VM = {};
-
-        var actionModel;
-        var submodels = {};
+        $scope.Audit = {};
         AuditService.GetAction($stateParams.id).then(function (data) {
-            actionModel = data;
-            return AuditService.GetTopic(actionModel.topicid);
-        }).then(function(topic){
-            submodels.Topic = topic;
-            return AuditService.GetAudit(actionModel.auditId);
+            $scope.dueDate = Utils.GetDPDate(data.dueDate);
+            $scope.Action = data;
+            return AuditService.GetAudit($scope.Action.auditId);
         }).then(function(audit){
-            submodels.Audit = audit;
-            return AuditService.GetFinding(actionModel.findingId);
+            $scope.Audit = audit;
+            return AuditService.GetTopic($scope.Action.topicid);
+        }).then(function(topic){
+            $scope.Audit.Topic = topic;
+            return AuditService.GetFinding($scope.Action.findingId);
         }).then(function(finding){
-            submodels.Finding = finding;
+            $scope.Audit.Finding = finding;
             $rootScope.app.Mask = false;
         }, function(err){
             $rootScope.app.Mask = false;

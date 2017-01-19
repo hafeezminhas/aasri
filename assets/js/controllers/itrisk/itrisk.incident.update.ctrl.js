@@ -5,6 +5,7 @@
     function ITRiskIncFormController ($scope, $rootScope, $state, $stateParams, ITRiskService, OPRiskService, Utils){
        $scope.mainTitle = $state.current.title;
        $scope.mainDesc = "RISK CONTROL SELF ASSESSMENTS";
+        $scope.IId = $stateParams.id;
 
         $scope.RiskCategories = { List: [], SelCount: 0 };
         $scope.Lookups = {};
@@ -12,6 +13,7 @@
         $scope.setOpt = function(op){
             op.Selected = !op.Selected;
             if(op.Selected){
+                $scope.VM.riskCategory = op.Label;
                 $scope.RiskCategories.SelCount++;
             } else {
                 $scope.RiskCategories.SelCount--;
@@ -68,16 +70,21 @@
 
 
         $scope.submitAction = function(){
+
             if($scope.Form.ITRisk.$pristine || $scope.Form.ITRisk.$invalid) return false;
 
-            ITRiskService.UpdateRim($scope.VM).then(function(res){
+            ITRiskService.UpdateRim($scope.IId, $scope.VM).then(function(res){
                 if(res.status === 200) $state.go('app.itrisk.incident.main');
             });
         };
 
         $scope.cancelAction = function(){
-            console.log($scope.Form.ITRisk.$pristine);
-            $state.go('app.policy');
+            if($scope.Form.ITRisk.$dirty){
+                var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
+                confirm.result.then(function(){ $state.go('app.itrisk.incident.main'); });
+                return false;
+            }
+            $state.go('app.itrisk.incident.main');
         };
 
         ITRiskService.GetRimById($stateParams.id).then(function(data){

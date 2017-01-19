@@ -21,12 +21,12 @@ app.service('OPRiskService', function($rootScope, APIHandler, Utils){
       return APIHandler.Get('oprisk/ori/status');
     };
 
-    this.PostRisk = function(params){
+    this.AddIncident = function(params){
       return APIHandler.Post('oprisk/ori', params);
     };
 
-    this.DeleteRisk = function(id){
-      return APIHandler.Delete('oprisk/ori'+ id);
+    this.DeleteIncident = function(id){
+      return APIHandler.Delete('oprisk/ori/'+ id);
     };
 
     this.UpdateIncident = function(id, params){

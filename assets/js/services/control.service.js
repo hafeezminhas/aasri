@@ -10,8 +10,24 @@ app.service('ControlService', function($rootScope, APIHandler, Utils){
     return APIHandler.Get('crtls/repository/'+id);
   };
 
-  this.AddRepo = function(){
-    return APIHandler.Post('crtls/repository');
+  this.GetRepoCat = function(){
+    return APIHandler.Get('crtls/repository/category');
+  };
+
+  this.GetRepoDef = function(){
+    return APIHandler.Get('crtls/repository/definition');
+  };
+
+  this.GetRepoRiskType = function(){
+    return APIHandler.Get('crtls/repository/risktype');
+  };
+
+  this.GetRepoSource = function(){
+    return APIHandler.Get('crtls/repository/source');
+  };
+
+  this.AddRepo = function(params){
+    return APIHandler.Post('crtls/repository', params);
   };
 
   this.DeleteRepo = function(id){
@@ -31,7 +47,7 @@ app.service('ControlService', function($rootScope, APIHandler, Utils){
   };
 
   this.AddTestPlans = function(params){
-    return APIHandler.Post('crtls/testPlans/'+params);
+    return APIHandler.Post('crtls/testPlans', params);
   };
 
   this.DeleteTestPlans = function(id){
@@ -40,6 +56,26 @@ app.service('ControlService', function($rootScope, APIHandler, Utils){
 
   this.UpdateTestPlans = function(id, params){
     return APIHandler.Put('crtls/testPlans/'+id, params);
+  };
+
+  this.GetTestPlanCategory = function(){
+      return APIHandler.Get('crtls/testPlans/category');
+  };
+
+  this.GetTestPlanPeriod = function(){
+      return APIHandler.Get('crtls/testPlans/period');
+  };
+
+  this.GetTestPlanRiskType = function(){
+      return APIHandler.Get('crtls/testPlans/risktype');
+  };
+
+  this.GetTestPlanSource = function(){
+      return APIHandler.Get('crtls/testPlans/source');
+  };
+
+  this.GetTestPlanStatus = function(){
+      return APIHandler.Get('crtls/testPlans/status');
   };
 
   this.GetTestResults = function(size, page){
@@ -51,7 +87,7 @@ app.service('ControlService', function($rootScope, APIHandler, Utils){
   };
 
   this.AddTestResults = function(params){
-      return APIHandler.Post('crtls/testResults/'+params);
+      return APIHandler.Post('crtls/testResults', params);
   };
 
   this.DeleteTestResults = function(id){

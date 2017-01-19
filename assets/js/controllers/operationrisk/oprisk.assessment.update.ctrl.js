@@ -14,6 +14,7 @@
         $scope.Form = {};
 
         $scope.submitAction = function(){
+
             if($scope.Form.Rcsa.$invalid || $scope.Form.Rcsa.$pristine) return false;
 
             OPRiskService.UpdateAssessment($stateParams.id, $scope.VM).then(function(res){
@@ -25,7 +26,9 @@
             if($scope.Form.Rcsa.$dirty){
                 var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
                 confirm.result.then(function(){ $state.go('app.oprisk.assessment.main'); });
+                return false;
             }
+            $state.go('appp.oprisk.assessment.main');
         };
 
         $scope.setOpt = function(op){

@@ -63,8 +63,8 @@
 								<td>{{tp.controlPriority}}</td>
 								<td>{{tp.controlStatus}}</td>
 								<td>
-									<a ui-sref="app.control.testplan.update({id: tp.id})" class="btn btn-xs btn-squared btn-dark-azure"><i class="ti-pencil"></i></a>
-									<a ng-click="delete(tp)" class="btn btn-xs btn-squared btn-red"><i class="ti-trash"></i></a>
+									<a ui-sref="app.control.testplan.update({id: tp.id})" ng-disabled="!tp.id" class="btn btn-xs btn-squared btn-dark-azure"><i class="ti-pencil"></i></a>
+									<a ng-click="delete(tp)" ng-disabled="!tp.id" class="btn btn-xs btn-squared btn-red"><i class="ti-trash"></i></a>
 								</td>
 							</tr>
 							</tbody>

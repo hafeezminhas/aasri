@@ -16,4 +16,12 @@ app.service('DashService', function(APIHandler){
         return APIHandler.PostWithFile('policies', params);
     };
 
+    this.GetControlAnals = function(){
+        return APIHandler.Get('dashboard/controlanalytics');
+    };
+
+    this.GetOpenItems = function(){
+        return APIHandler.Get('dashboard/openitems');
+    };
+
 });

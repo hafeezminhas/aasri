@@ -167,6 +167,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $state, $localStorage, $w
 		return APIHandler.Get('assessmenttypes');
 	}).then(function(ats){
 		$rootScope.app.Lookup.AssessTypes = ats;
+		//console.log($rootScope.app.Lookup);
 	});
 
 	$rootScope.app.Lookup.Severity = [
@@ -174,6 +175,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $state, $localStorage, $w
     	{ key: 'Medium', val: 'Medium' },
         { key: 'High', val: 'High' }
 	];
+
 	/*
 	  --- Lookup Glossary ---
 	  LIST001 --- Region

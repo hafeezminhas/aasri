@@ -23,13 +23,12 @@
              assessId: 0,
              assessName: "",
              business: "",
-             createdBy: "",
+             createdBy: "Alan",
              createdOn: "",
              due_date: "",
              filemodel: [],
              filename: "",
              frequency: "",
-             id: "",
              modifiedBy: "",
              modifiedOn: "",
              period: "",
@@ -38,9 +37,8 @@
              resPerson: ""
         };
 
-        $scope.submitAction = function(){
+        $scope.submitAction = function() {
             if($scope.Form.Rcsa.$invalid) return false;
-
             OPRiskService.PostAssessment($scope.VM).then(function(res){
                 if(res.status === 200) $state.go('app.oprisk.assessment.main');
             });
@@ -50,7 +48,9 @@
             if($scope.Form.Rcsa.$dirty){
                 var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
                 confirm.result.then(function(){ $state.go('app.oprisk.assessment.main'); });
+                return false;
             }
+            $state.go('app.oprisk.assessment.main');
         };
 
         $scope.setOpt = function(op){

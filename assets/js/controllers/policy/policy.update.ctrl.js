@@ -11,15 +11,19 @@
         $scope.submitAction = function(){
             $scope.IsSubmitted = true;
             if($scope.Form.Policy.$pristine || $scope.Form.Policy.$invalid) return false;
-
+            $scope.VM.createdOn = "2017-01-18";
             PolicyService.UpdatePolicy($stateParams.id, $scope.VM).then(function(res){
-                if(res.status === 200) $state.go('app.policy');
+                if(res.status === 200) $state.go('app.policy.main');
             });
         };
 
         $scope.cancelAction = function(){
-            console.log($scope.Form.Policy.$pristine);
-            $state.go('app.policy');
+            if($scope.Form.Policy.$dirty){
+                var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
+                confirm.result.then(function(){ $state.go('app.policy.main'); });
+                return false;
+            }
+            $state.go('app.policy.main');
         };
 
         PolicyService.GetPolicy($stateParams.id).then(function(data){

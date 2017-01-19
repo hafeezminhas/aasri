@@ -12,6 +12,32 @@
      Confirm Dialogue Modal Controller
      ----------------------------------
      */
+    app.controller('NotificationCtrl', function ($scope, $rootScope, $uibModalInstance, items) {
+
+        $rootScope.app.CurrentModal = $uibModalInstance;
+        $scope.vm = items;
+
+        $scope.ok = function () {
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+
+        $('.modal-content').keyup(function (e) {
+            console.log(e.keyCode);
+            if (e.keyCode === 13) $scope.ok();
+            if (e.keyCode === 27) $scope.cancel();
+        });
+    });
+    //------------ End --------------
+
+    /*
+     ----------------------------------
+     Confirm Dialogue Modal Controller
+     ----------------------------------
+     */
     app.controller('ConfirmDialogueCtrl', function ($scope, $rootScope, $uibModalInstance, items) {
 
         $rootScope.app.CurrentModal = $uibModalInstance;

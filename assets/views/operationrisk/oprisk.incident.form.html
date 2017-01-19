@@ -22,25 +22,25 @@
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
                                         <label> Name </label>
-                                        <input type="text" name="rcsa_name" ng-model="VM.rcsa_name" placeholder="Name" class="form-control">
+                                        <input type="text" name="rcsaName" ng-model="VM.rcsaName" placeholder="Name" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
                                         <label> Operational Loss </label>                                        
-                                        <input type="text" name="operational_loss" ng-model="VM.operational_loss"  placeholder="Operational Loss" class="form-control">
+                                        <input type="text" name="operationalLoss" ng-model="VM.operationalLoss"  placeholder="Operational Loss" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
                                         <label> Description </label>
-                                        <input type="text" name="risk_description" ng-model="VM.risk_description"  placeholder="Description" class="form-control">
+                                        <input type="text" name="riskDesc" ng-model="VM.riskDescription"  placeholder="Description" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
                                         <label> Severity </label>
-                                        <select type="text" name="risk_severity" ng-model="VM.risk_severity" ng-options="op.key as op.val for op in app.Lookup.Severity" class="form-control">
+                                        <select type="text" name="riskSeverity" ng-model="VM.riskSeverity" ng-options="op.key as op.val for op in app.Lookup.Severity" class="form-control">
                                             <option value="">Select Severity</option>
                                         </select>
                                     </div>
@@ -48,8 +48,8 @@
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
                                         <label> Identified Date </label>
-                                        <datepicker date-format="dd-MM-yyyy">
-                                            <input type="text" name="identified_date" ng-model="VM.identified_date" placeholder="Description" class="form-control">
+                                        <datepicker date-format="{{app.Config.DateFormat}}">
+                                            <input type="text" name="identifiedDate" ng-model="VM.identifiedDate" placeholder="Description" class="form-control">
                                         </datepicker>
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                 <div class="col-xs-12 col-md-6">
                                     <div class="form-group">
                                         <label> Remediation Date </label>
-                                        <datepicker date-format="dd-MM-yyyy">
+                                        <datepicker date-format="{{app.Config.DateFormat}}">
                                             <input type="text" name="remeDate" ng-model="VM.remeDate" placeholder="Remediation Date" class="form-control">
                                         </datepicker>
                                     </div>
@@ -205,6 +205,11 @@
                                         <label> Remediation Status </label>
                                         <input type="text" name="remeStatus" ng-model="VM.remeStatus" placeholder="Remediation Status" class="form-control">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="$state.includes('app.oprisk.incident.update')">
+                                <div class="col-xs-12">
+                                    <a ui-sref="app.oprisk.incident.actions({id: IId})" class="btn btn-sm btn-squared btn-dark-azure">Actions</a>
                                 </div>
                             </div>
                         </fieldset>
@@ -326,9 +331,9 @@
                         </fieldset>
                         <hr class="hrule4" />
                         <div class="col-xs-12 text-right">
-                            <button class="btn btn-squared btn-dark-blue" type="submit"><i class="fa fa-save"></i> Save</button>
+                            <button class="btn btn-squared btn-dark-blue" type="submit" ng-disabled="Form.OpIncident.$invalid || Form.OpIncident.$pristine"><i class="fa fa-save"></i> Save</button>
                             <button class="btn btn-squared btn-dark-blue" type="reset"><i class="fa fa-refresh"></i> Reset</button>
-                            <button class="btn btn-squared btn-dark-blue" ui-sref="app.oprisk.incident.main"><i class="fa fa-times"></i>  Cancel</button>
+                            <button class="btn btn-squared btn-dark-blue" type="button" ng-click="cancelAction()"><i class="fa fa-times"></i>  Cancel</button>
                         </div>
                     </form>
                 </div>

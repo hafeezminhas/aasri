@@ -13,7 +13,7 @@ app.service('PolicyService', function(APIHandler){
     };
 
     this.AddPolicy = function(params){
-        return APIHandler.Post('policies', params);
+        return APIHandler.PostWithFile('policies', params);
     };
 
     this.DeletePolicy = function(id){

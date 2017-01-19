@@ -33,12 +33,13 @@
             }
         };
 
-        $scope.delete = function(r){
+        $scope.delete = function(tp){
             var confirmation = Utils.CreateConfirmModal("Confirm Deletion", "Are u sure you want to delete the seleced item?", "Yes", "No");
             confirmation.result.then(function () {
                 $rootScope.app.Mask = true;
-                ControlService.DeleteTestPlans(r.id).then(function(data){
-                    if(data.status===200) loadRepos();
+                console.log(tp);
+                ControlService.DeleteTestPlans(tp.id).then(function(data){
+                    if(data.status===200) loadTestPlans();
                 });
             }, function(){ $rootScope.app.Mask = false; });
         };

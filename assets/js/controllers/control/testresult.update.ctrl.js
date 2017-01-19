@@ -1,39 +1,12 @@
 (function(){
-    TestResultUpdateController.$inject = ['$scope','$rootScope','$state', , 'ControlService', 'Utils'];
+    TestResultUpdateController.$inject = ['$scope','$rootScope','$state', '$stateParams', 'ControlService', 'Utils'];
     app.controller('TestResultUpdateCtrl', TestResultUpdateController);
 
-    function TestResultUpdateController ($scope, $rootScope, $state, ControlService, Utils){
+    function TestResultUpdateController ($scope, $rootScope, $state, $stateParams, ControlService, Utils){
         $scope.mainTitle = $state.current.title;
         $scope.mainDesc = "RISK CONTROL SELF ASSESSMENTS";
 
         $scope.Form = {};
-        $scope.VM = {
-             controlDataModel: [],
-             controlMethod: "",
-             controlPriority: "",
-             controlStatus: "",
-             controlsTested: "",
-             createdBy: "",
-             createdOn: "",
-             department: [{
-                 area: "",
-                 deptId: "",
-                 deptName: "",
-                 id: ""
-            }],
-             id: "",
-             modifiedBy: "",
-             modifiedOn: "",
-             regionName: "",
-             testCompletedDate: "",
-             testDueDate: "",
-             testFrequency: "",
-             testPlans: "",
-             testResultName: "",
-             testResults: "",
-             testresultFileModel: []
-        };
-
 
         $scope.addTestPlan = function(){
 
@@ -61,19 +34,22 @@
         };
 
         $scope.submitAction = function() {
-            if($scope.Form.CtrlRepo.$invalid) return false;
-            //Form Post to go here.
+            if($scope.Form.TestResult.$invalid) return false;
+            ControlService.UpdateTestResults($stateParams.id, $scope.VM).then(function(res){
+                if(res.status===200) $state.go('app.control.testresult.main');
+            });
         };
 
         $scope.cancelAction = function() {
-            if($scope.Form.CtrlRepo.$dirty) {
+            if($scope.Form.TestResult.$dirty) {
                 var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
                 confirm.result.then(function(){ $state.go('app.control.testresult.main'); });
-                return false;
             }
-            $state.go('app.control.testresult.main');
         };
 
-        $rootScope.app.Mask = false;
+        ControlService.GetTestResult($stateParams.id).then(function(data){
+            $scope.VM = data;
+            $rootScope.app.Mask = false;
+        });
     }
 })();

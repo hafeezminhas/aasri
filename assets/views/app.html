@@ -13,6 +13,60 @@
 
 
 <!-- -------- Global Modal Templates --------- -->
+<!--Popover Template-->
+<script type="text/ng-template" id="actionPopover.html">
+	<div class="triangle"></div>
+	<div class="col-xs-12 padding-10">
+		<table class="table table-condensed text-small">
+			<tbody>
+				<tr>
+					<td>Name</td>
+					<td>{{t.alertName || 'No Name'}}</td>
+				</tr>
+				<tr>
+					<td>Description</td>
+					<td>{{t.alertDesc || 'No Description available'}}</td>
+				</tr>
+				<tr>
+					<td>Due Date</td>
+					<td>{{t.alertDueDate}}</td>
+				</tr>
+				<tr>
+					<td>Responsible Person</td>
+					<td>{{t.alertRPerson}}</td>
+				</tr>
+				<tr>
+					<td>Priority</td>
+					<td>{{t.alertPriority}}</td>
+				</tr>
+				<tr>
+					<td>Status</td>
+					<td>{{t.alertStatus}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</script>
+
+<!--  Start: Modal Template -->
+<script type="text/ng-template" id="notification.tpl.html">
+	<div class="modal-header">
+		<button class="close" data-dismiss="modal" ng-click="cancel()"><i class="fa fa-times"></i></button>
+		<h5 class="modal-title"><i class="fa {{vm.Icon}} {{vm.Icocolor}}"></i> {{vm.Title}}</h5>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-xs-12 padding-top-15">
+				<p> {{vm.Message || 'There is no message available for this confirmation.'}} </p>
+			</div>
+			<div class="col-xs-12"><hr class="hrule4" /></div>
+			<div class="col-xs-12 text-center">
+				<button class="btn btn-sm btn-squared btn-dark-blue" ng-click="ok()"><i class="fa fa-arrow-circle-right"></i> Ok </button>
+			</div>
+		</div>
+	</div>
+</script>
+<!-- end: Modal Template -->
 
 <!--  Start: Modal Template -->
 <script type="text/ng-template" id="confirm.tpl.html">

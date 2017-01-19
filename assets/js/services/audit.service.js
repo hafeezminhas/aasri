@@ -36,4 +36,8 @@ app.service('AuditService', function(APIHandler){
         return APIHandler.Get('auditactions/'+id);
     };
 
+    this.ReviewAction = function(id, params){
+        return APIHandler.Put('auditactions/'+id, params);
+    };
+
 });

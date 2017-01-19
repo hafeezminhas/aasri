@@ -9,16 +9,7 @@ function ($stateProvider, $urlRouterProvider ,$locationProvider, $controllerProv
     $httpProvider.defaults.withCredentials = true;
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.cache = false;
-
-    //var user = 'user', pass = '6hf38!%DQ09736v,32/f85Ax@#';
-    //console.log($base64.encode(user+':'+pass));
-    // delete $httpProvider.defaults.headers['Authorization'];
-    // delete $httpProvider.defaults.headers.common['Authorization'];
-    // $httpProvider.defaults.headers.common['Authorization'] = 'Basic ' + $base64.encode(user+':'+pass);
-
-    //$httpProvider.defaults.headers.common['Authorization'] = 'Basic dXNlcjo2aGYzOCElRFEwOTczNnYsMzIvZjg1QXhAIw==';
-
-    //$httpProvider.interceptors.push('APIInterceptor');
+    $httpProvider.interceptors.push('APIInterceptor');
 
     app.controller = $controllerProvider.register;
     app.directive = $compileProvider.directive;
@@ -63,7 +54,7 @@ function ($stateProvider, $urlRouterProvider ,$locationProvider, $controllerProv
     }).state('app', {
         url: "",
         templateUrl: "assets/views/app.html",
-        resolve: loadSequence('modernizr', 'moment', 'angularMoment', 'uiSwitch', 'perfect-scrollbar-plugin', 'toaster', 'ngAside', 'vAccordion', 'sweet-alert', 'oitozero.ngSweetAlert', 'truncate', 'htmlToPlaintext', 'angular-notification-icons'),
+        resolve: loadSequence('modernizr', 'moment', 'angularMoment', 'uiSwitch', 'perfect-scrollbar-plugin', 'toaster', 'ngAside', 'vAccordion', 'sweet-alert', 'oitozero.ngSweetAlert', 'truncate', 'htmlToPlaintext', 'angular-notification-icons', 'ngrtPopover'),
         abstract: true
     }).state('app.dashboard', {
         url: '/dashboard',
@@ -134,6 +125,13 @@ function ($stateProvider, $urlRouterProvider ,$locationProvider, $controllerProv
         icon: 'ti-layout-media-left-alt',
         controller: 'OprIncidentUpdateCtrl',
         resolve: loadSequence('OprIncidentUpdateCtrl')
+    }).state('app.oprisk.incident.actions', {
+        url: '/:id/actions',
+        templateUrl: "assets/views/operationrisk/oprisk.incident.actions.html",
+        title: 'Add ORI Actions',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'OprIncidentActionCtrl',
+        resolve: loadSequence('OprIncidentActionCtrl')
     }).state('app.oprisk.assessment', {
         url: '/assessment',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -193,6 +191,13 @@ function ($stateProvider, $urlRouterProvider ,$locationProvider, $controllerProv
         icon: 'ti-layout-media-left-alt',
         controller: 'ITRiskIncUpdateCtrl',
         resolve: loadSequence('ITRiskIncUpdateCtrl')
+    }).state('app.itrisk.incident.actions', {
+        url: '/:id/actions',
+        templateUrl: "assets/views/itrisk/itrisk.incident.actions.html",
+        title: 'Add IT Risk Incident Action',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'ITRiskIncActionsCtrl',
+        resolve: loadSequence('ITRiskIncActionsCtrl')
     }).state('app.itrisk.assessment', {
         url: '/assessment',
         template: '<div ui-view class="fade-in-up"></div>',
@@ -219,6 +224,91 @@ function ($stateProvider, $urlRouterProvider ,$locationProvider, $controllerProv
         controller: 'ITRiskAssUpdateCtrl',
         resolve: loadSequence('ITRiskAssUpdateCtrl')
     })
+
+    /*
+     ---- Compliance Routes ----
+     */
+    .state('app.compliance', {
+        url: '/compliance',
+        template: '<div ui-view class="fade-in-up"></div>',
+        abstract: true
+    }).state('app.compliance.soxtp', {
+        url: '/soxtestplan',
+        template: '<div ui-view class="fade-in-up"></div>',
+        abstract: true
+    }).state('app.compliance.soxtp.main', {
+        url: '',
+        templateUrl: "assets/views/compliance/sox.testplan.html",
+        title: 'SOX TEST PLAN SUMMARY',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'SoxTPCtrl',
+        resolve: loadSequence('SoxTPCtrl')
+    }).state('app.compliance.soxtp.form', {
+        url: '/manage',
+        templateUrl: "assets/views/compliance/sox.testplan.form.html",
+        title: 'Add SOX Test Plan',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'SoxTPFormCtrl',
+        resolve: loadSequence('SoxTPFormCtrl')
+    }).state('app.compliance.soxtp.update', {
+        url: '/:id/update',
+        templateUrl: "assets/views/compliance/sox.testplan.form.html",
+        title: 'Add SOX Test Plan',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'SoxTPUpdateCtrl',
+        resolve: loadSequence('SoxTPUpdateCtrl')
+    }).state('app.compliance.soxrcm', {
+        url: '/soxrcm',
+        template: '<div ui-view class="fade-in-up"></div>',
+        abstract: true
+    }).state('app.compliance.soxrcm.main', {
+        url: '',
+        templateUrl: "assets/views/compliance/sox.rcm.html",
+        title: 'SOX RISK CONTROL MATRIX SUMMARY',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'SoxRCMCtrl',
+        resolve: loadSequence('SoxRCMCtrl')
+    }).state('app.compliance.soxrcm.form', {
+        url: '/manage',
+        templateUrl: "assets/views/compliance/sox.rcm.form.html",
+        title: 'Add SOX Risk Control Matrix',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'SoxRCMFormCtrl',
+        resolve: loadSequence('SoxRCMFormCtrl')
+    }).state('app.compliance.soxrcm.update', {
+        url: '/:id/update',
+        templateUrl: "assets/views/compliance/sox.rcm.form.html",
+        title: 'Add SOX Risk Control Matrix',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'SoxRCMUpdateCtrl',
+        resolve: loadSequence('SoxRCMUpdateCtrl')
+    }).state('app.compliance.soxpra', {
+        url: '/soxpra',
+        template: '<div ui-view class="fade-in-up"></div>',
+        abstract: true
+    }).state('app.compliance.soxpra.main', {
+        url: '',
+        templateUrl: "assets/views/compliance/sox.pra.html",
+        title: 'SOX Process Risk Analysis',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'RepoCtrl',
+        resolve: loadSequence('RepoCtrl')
+    }).state('app.compliance.soxpra.form', {
+        url: '/manage',
+        templateUrl: "assets/views/compliance/sox.pra.form.html",
+        title: 'Add SOX Risk Analysis',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'RepoFormCtrl',
+        resolve: loadSequence('RepoFormCtrl')
+    }).state('app.compliance.soxpra.update', {
+        url: '/:id/update',
+        templateUrl: "assets/views/compliance/sox.pra.form.html",
+        title: 'Add SOX Risk Analysis',
+        icon: 'ti-layout-media-left-alt',
+        controller: 'RepoFormCtrl',
+        resolve: loadSequence('RepoFormCtrl')
+    })
+
 
     /*
         ---- IT RISK Routes ----
@@ -300,8 +390,8 @@ function ($stateProvider, $urlRouterProvider ,$locationProvider, $controllerProv
         templateUrl: "assets/views/control/control.testresult.form.html",
         title: 'Update CONTROL TEST RESULT',
         icon: 'ti-layout-media-left-alt',
-        controller: 'TestResultFormCtrl',
-        resolve: loadSequence('TestResultFormCtrl')
+        controller: 'TestResultUpdateCtrl',
+        resolve: loadSequence('TestResultUpdateCtrl')
     }).state('app.control.mapping', {
         url: '/mapping',
         templateUrl: "assets/views/control/control.mapping.html",
@@ -310,7 +400,7 @@ function ($stateProvider, $urlRouterProvider ,$locationProvider, $controllerProv
         controller: 'ControlMapCtrl',
         resolve: loadSequence('ControlMapCtrl')
     }).state('app.control.dashboard', {
-        url: '/mapping',
+        url: '/dashboard',
         templateUrl: "assets/views/control/control.dashboard.html",
         title: 'CONTROL Dashboard',
         icon: 'ti-layout-media-left-alt',
@@ -340,7 +430,7 @@ function ($stateProvider, $urlRouterProvider ,$locationProvider, $controllerProv
         controller: 'PolicyFormCtrl',
         resolve: loadSequence('PolicyFormCtrl')
     }).state('app.policy.update', {
-        url: '/:id/manage',
+        url: '/:id/update',
         templateUrl: "assets/views/policy/policy.form.html",
         title: 'Update Procedures and Policies Management',
         icon: 'ti-layout-media-left-alt',

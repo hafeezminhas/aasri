@@ -50,10 +50,9 @@
         $scope.deleteAction = function(r){
             var confirmation = Utils.CreateConfirmModal("Confirm Deletion", "Are u sure you want to delete the seleced item?", "Yes", "No");
             confirmation.result.then(function () {
-                console.log("U chose Yes");
                 $rootScope.app.Mask = true;
-                OPRiskService.DeleteAssessment(r.id).then(function(data){
-                    if(data.status===200) loadAssessments();
+                ITRiskService.DeleteRim(r.id).then(function(data){
+                    if(data.status===200) loadRim();
                 });
             });
         };
@@ -64,9 +63,6 @@
 
         function loadRim(){
             ITRiskService.GetRim().then(function (data) {
-                data.forEach(function(r){
-                    r.IDate = Utils.createDate(r.modifiedOn);
-                });
                 $scope.Incidents = data;
                 $rootScope.app.Mask = false;
             });

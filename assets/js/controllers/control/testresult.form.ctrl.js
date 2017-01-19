@@ -15,13 +15,7 @@
              controlsTested: "",
              createdBy: "",
              createdOn: "",
-             department: [{
-                 area: "",
-                 deptId: "",
-                 deptName: "",
-                 id: ""
-            }],
-             id: "",
+             department: [],
              modifiedBy: "",
              modifiedOn: "",
              regionName: "",
@@ -33,7 +27,6 @@
              testResults: "",
              testresultFileModel: []
         };
-
 
         $scope.addTestPlan = function(){
 
@@ -61,12 +54,14 @@
         };
 
         $scope.submitAction = function() {
-            if($scope.Form.CtrlRepo.$invalid) return false;
-            //Form Post to go here.
+            if($scope.Form.TestResult.$invalid) return false;
+            ControlService.AddTestResults($scope.VM).then(function(res){
+                if(res.status===200) $state.go('app.control.testresult.main');
+            });
         };
 
         $scope.cancelAction = function() {
-            if($scope.Form.CtrlRepo.$dirty) {
+            if($scope.Form.TestResult.$dirty) {
                 var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
                 confirm.result.then(function(){ $state.go('app.control.testresult.main'); });
                 return false;

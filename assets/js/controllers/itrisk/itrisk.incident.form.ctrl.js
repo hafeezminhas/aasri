@@ -24,12 +24,11 @@
              controlDescription: "",
              controlName: "",
              controlStatus: "",
-             createdBy: "",
-             createdOn: "",
+             createdBy: "Alan",
+             createdOn: "1484566091363",
              department: "",
              geoImpact: "",
              graphicalImpact: "",
-             id: "",
              identifiedDate: "",
              impactedProcName: "",
              inherentRiskRating: "",
@@ -71,7 +70,7 @@
             OPRiskService.GetControlData().then(function(data){
                 data.forEach(function(c, i){
                     c.Selected = false;
-                    c.modifiedOn = Utils.createDate(c.modifiedOn);
+                    c.modifiedOn = new Date(c.modifiedOn);
                 });
                 var controlModal = Utils.CreateSelectListView("Select Controls", data, headers, cols);
                 controlModal.result.then(function(list){
@@ -114,8 +113,12 @@
         };
 
         $scope.cancelAction = function(){
-            console.log($scope.Form.ITRisk.$pristine);
-            $state.go('app.policy');
+            if($scope.Form.ITRisk.$dirty){
+                var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
+                confirm.result.then(function(){ $state.go('app.itrisk.incident.main'); });
+                return false;
+            }
+            $state.go('app.itrisk.incident.main');
         };
 
 

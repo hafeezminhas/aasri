@@ -212,13 +212,23 @@ input[type=file] {
 }
 
 .file-list-group {
+    margin-top:5px;
     padding:2px;
     list-style: none;
 }
 
 .file-list-item {
+    padding:4px;
+    font-size:14px;
     list-style-type: none;
-    color:#0000ee;
+    color: #3b64ee;
+    background-color: #E9E9E9;
+    margin-bottom:2px;
+}
+
+.file-list-item > i{
+    font-size:16px;
+    margin-left:5px;
 }
 
 /*
@@ -320,4 +330,11 @@ hr.hrule4 {
 
 .bg-light-yellow {
     background-color: rgba(214, 237, 158, 0.48);
+}
+
+.dashchart-btn {
+    position: absolute;
+    top:10px;
+    left: 10px;
+    z-index:99999;
 }

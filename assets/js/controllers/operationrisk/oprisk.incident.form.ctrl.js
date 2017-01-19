@@ -14,47 +14,7 @@
         $scope.Form = {};
         $scope.RiskCategories = { List: [], SelCount: 0 };
 
-        $scope.dpOptions = {
-            format: 'dd-mm-yyyy',
-            autoclose: true
-        };
-
         $scope.Lookups = {};
-
-        $scope.Lookups.Status = [
-            { key: "Submitted", val: "Submitted" },
-            { key: "In Progress", val: "In Progress" },
-            { key: "Ready to Approve", val: "Ready to Approve" },
-            { key: "To Approve", val: "To Approve" },
-            { key: "Approved", val: "Approved" },
-            { key: "Completed", val: "Completed" }
-        ];
-
-        $scope.Lookups.SecondaryRisk = [
-            { key: 101, val: "Compliance" },
-            { key: 102, val: "Credit" },
-            { key: 103, val: "Market" },
-            { key: 104, val: "Strategic" },
-            { key: 105, val: "Reputational" },
-            { key: 106, val: "Branch" }
-        ];
-
-        $scope.Lookups.GeoImpactOpts = [
-            { key: 201, val: "Asia Pacific" },
-            { key: 202, val: "EMEA" },
-            { key: 203, val: "North America" },
-            { key: 204, val: "Europe" },
-            { key: 205, val: "All" }
-        ];
-
-        $scope.Lookups.InherentImpact = [
-            { key: 301, val: 1 },
-            { key: 302, val: 2 },
-            { key: 303, val: 3 },
-            { key: 304, val: 4 },
-            { key: 305, val: 5 }
-        ];
-
         $scope.VM = {
              asTypeCode: "",
              auditFileModel: [],
@@ -65,7 +25,7 @@
              controlDescription: "",
              controlName: "",
              controlStatus: "",
-             createdBy: "",
+             createdBy: "Alan",
              createdOn: "",
              geographicImpact: "",
              identifiedDate: "",
@@ -102,6 +62,7 @@
         $scope.setOpt = function(op){
             op.Selected = !op.Selected;
             if(op.Selected){
+                $scope.VM.riskCategory = op.Label;
                 $scope.RiskCategories.SelCount++;
             } else {
                 $scope.RiskCategories.SelCount--;
@@ -116,7 +77,7 @@
             OPRiskService.GetControlData().then(function(data){
                 data.forEach(function(c, i){
                     c.Selected = false;
-                    c.modifiedOn = Utils.createDate(c.modifiedOn);
+                    c.modifiedOn = c.modifiedOn? new Date(c.modifiedOn) : "";
                 });
                 var controlModal = Utils.CreateSelectListView("Select Controls", data, headers, cols);
                 controlModal.result.then(function(list){
@@ -157,12 +118,20 @@
         };
 
         $scope.submitAction = function(){
-            if(Form.OpIncident.$invalid || Form.OpIncident.pristine) return false;
-            OPRiskService.AddRim($scope.VM).then(function(res){
+            if($scope.Form.OpIncident.$invalid || $scope.Form.OpIncident.$pristine) return false;
+            OPRiskService.AddIncident($scope.VM).then(function(res){
                 if(res.status===200) $state.go('app.oprisk.incident.main');
             });
         };
 
+        $scope.cancelAction = function(){
+            if($scope.Form.OpIncident.$dirty){
+                var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
+                confirm.result.then(function(){ $state.go('app.oprisk.incident.main'); });
+                return false;
+            }
+            $state.go('app.oprisk.incident.main');
+        };
 
         OPRiskService.GetRiskCategories()
             .then(function(data){

@@ -10,6 +10,7 @@
 
         $scope.mainTitle = $state.current.title || 'loading';
         $scope.mainDesc = "Add new operational risk incident";
+        $scope.IId = $stateParams.id;
 
         $scope.Form = {};
         $scope.RiskCategories = { List: [], SelCount: 0 };
@@ -22,6 +23,7 @@
         $scope.setOpt = function(op){
             op.Selected = !op.Selected;
             if(op.Selected){
+                $scope.VM.riskCategory = op.Label;
                 $scope.RiskCategories.SelCount++;
             } else {
                 $scope.RiskCategories.SelCount--;
@@ -36,7 +38,7 @@
             OPRiskService.GetControlData().then(function(data){
                 data.forEach(function(c, i){
                     c.Selected = false;
-                    c.modifiedOn = Utils.createDate(c.modifiedOn);
+                    c.modifiedOn = c.modifiedOn? new Date(c.modifiedOn) : "";
                 });
                 var controlModal = Utils.CreateSelectListView("Select Controls", data, headers, cols);
                 controlModal.result.then(function(list){
@@ -81,6 +83,15 @@
             OPRiskService.UpdateIncident($stateParams.id, $scope.VM).then(function(res){
                 if(res.status===200) $state.go('app.oprisk.incident.main');
             });
+        };
+        
+        $scope.cancelAction = function(){
+            if($scope.Form.OpIncident.$dirty){
+                var confirm = Utils.CreateConfirmModal("Confirmation", "Are you sure you want to cancel?", "Yes", "No");
+                confirm.result.then(function(){ $state.go('app.oprisk.incident.main'); });
+                return false;
+            }
+            $state.go('app.oprisk.incident.main');
         };
 
         OPRiskService.GetRiskIncident($stateParams.id).then(function(data){

@@ -28,6 +28,7 @@ app.constant('JS_REQUIRES', {
         'touchspin-plugin': ['libs/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js', 'libs/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css'],
 		'spectrum-plugin': ['libs/spectrum/spectrum.js', 'libs/spectrum/spectrum.css'],
 		'highcharts': ['libs/highcharts-ng/dist/highcharts-ng.js'],
+        'ngrtPopover': ['libs/angular-rt-popup/dist/angular-rt-popup.min.js'],
 
         /*
         *  Angular Application Controllers
@@ -41,6 +42,7 @@ app.constant('JS_REQUIRES', {
         'OprIncidentCtrl':       'assets/js/controllers/operationrisk/oprisk.incident.ctrl.js',
         'OprIncidentFormCtrl':   'assets/js/controllers/operationrisk/oprisk.incident.form.ctrl.js',
         'OprIncidentUpdateCtrl': 'assets/js/controllers/operationrisk/oprisk.incident.update.ctrl.js',
+        'OprIncidentActionCtrl': 'assets/js/controllers/operationrisk/oprisk.incident.actions.ctrl.js',
         'OprAssessmentCtrl':     'assets/js/controllers/operationrisk/oprisk.assessment.ctrl.js',
         'OprAssessmentFormCtrl': 'assets/js/controllers/operationrisk/oprisk.assessment.form.ctrl.js',
         'OprAssessmentUpdateCtrl': 'assets/js/controllers/operationrisk/oprisk.assessment.update.ctrl.js',
@@ -49,11 +51,22 @@ app.constant('JS_REQUIRES', {
         //IT Risk related Controllers
         'ITRiskIncCtrl':        'assets/js/controllers/itrisk/itrisk.incident.ctrl.js',
         'ITRiskIncFormCtrl':    'assets/js/controllers/itrisk/itrisk.incident.form.ctrl.js',
-        'ITRiskIncUpdateCtrl':    'assets/js/controllers/itrisk/itrisk.incident.update.ctrl.js',
+        'ITRiskIncUpdateCtrl':  'assets/js/controllers/itrisk/itrisk.incident.update.ctrl.js',
+        'ITRiskIncActionsCtrl':  'assets/js/controllers/itrisk/itrisk.incident.actions.ctrl.js',
         'ITRiskAssCtrl':        'assets/js/controllers/itrisk/itrisk.assessment.ctrl.js',
         'ITRiskAssFormCtrl':    'assets/js/controllers/itrisk/itrisk.assessment.form.ctrl.js',
-        'ITRiskAssUpdateCtrl':    'assets/js/controllers/itrisk/itrisk.assessment.update.ctrl.js',
+        'ITRiskAssUpdateCtrl':  'assets/js/controllers/itrisk/itrisk.assessment.update.ctrl.js',
 
+        //Compliance related Controllers
+        'SoxTPCtrl':            'assets/js/controllers/compliance/sox.tp.ctrl.js',
+        'SoxTPFormCtrl':        'assets/js/controllers/compliance/sox.tp.form.ctrl.js',
+        'SoxTPUpdateCtrl':      'assets/js/controllers/compliance/sox.tp.update.ctrl.js',
+        'SoxRCMCtrl':           'assets/js/controllers/compliance/sox.rcm.ctrl.js',
+        'SoxRCMFormCtrl':       'assets/js/controllers/compliance/sox.rcm.form.ctrl.js',
+        'SoxRCMUpdateCtrl':     'assets/js/controllers/compliance/sox.rcm.update.ctrl.js',
+        'SoxPRACtrl':           'assets/js/controllers/compliance/sox.pra.ctrl.js',
+        'SoxPRAFormCtrl':       'assets/js/controllers/compliance/sox.pra.form.ctrl.js',
+        'SoxPRAUpdateCtrl':     'assets/js/controllers/compliance/sox.pra.update.ctrl.js',
 
         //Control related Controllers
         'RepoCtrl':             'assets/js/controllers/control/repo.ctrl.js',
@@ -72,7 +85,7 @@ app.constant('JS_REQUIRES', {
         //Policy & Mitigate related Controllers
         'PolicyCtrl':           'assets/js/controllers/policy/policy.ctrl.js',
         'PolicyFormCtrl':       'assets/js/controllers/policy/policy.form.ctrl.js',
-        'PolicyUpdateCtrl':       'assets/js/controllers/policy/policy.update.ctrl.js',
+        'PolicyUpdateCtrl':     'assets/js/controllers/policy/policy.update.ctrl.js',
         'RemediationsCtrl':     'assets/js/controllers/mitigate/remediations.ctrl.js',
 
         //Measure related Controllers
@@ -80,7 +93,7 @@ app.constant('JS_REQUIRES', {
         'VulnerabilityCtrl':    'assets/js/controllers/measure/vulnerability.ctrl.js',
 
         //*** Filters
-        'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js'
+        'htmlToPlaintext':      'assets/js/filters/htmlToPlaintext.js'
     },
 
     /*

@@ -20,46 +20,28 @@
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
 									<label> Test Result Name </label>
-									<input type="text" name="testPlanName" ng-model="VM.testPlanName" placeholder="Name" class="form-control">
+									<input type="text" name="testResultName" ng-model="VM.testResultName" placeholder="Name" class="form-control">
 								</div>
 							</div>
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
 									<label> Description </label>
-									<input type="text" name="testPlanDesc" ng-model="VM.testPlanDesc" placeholder="Operational Loss" class="form-control">
+									<input type="text" name="testResultDesc" ng-model="VM.testResultDesc" placeholder="Operational Loss" class="form-control">
 								</div>
 							</div>
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
 									<label> Department </label>
-									<select name="controlCategory" ng-model="VM.controlCategory" class="form-control">
+									<select name="department" ng-model="VM.department[0]" ng-options="d as d.deptName for d in app.Lookup.Departments" class="form-control">
 										<option value="">Select</option>
-										<option value="DEQ01">Equities</option>
-										<option value="DFX01">Fixed Income</option>
-										<option value="DIB01">Investment Banking</option>
-										<option value="DAM01">Asset Management</option>
-										<option value="DIT01">IT</option>
-										<option value="DTX01">TAX</option>
-										<option value="DTS01">Treasury</option>
-										<option value="DCN01">Controllers</option>
-										<option value="DHR01">HR</option>
-										<option value="DLG01">Legal</option>
-										<option value="DOP01">Operations</option>
-										<option value="DRM01">Risk Management</option>
-										<option value="DCM01">Compliance</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
 									<label> Region </label>
-									<select name="controlCategory" ng-model="VM.controlCategory" class="form-control">
+									<select name="regionName" ng-model="VM.regionName" ng-options="op.key as op.val for op in app.Lookup.LIST001"  class="form-control">
 										<option value="">Select</option>
-										<option value="Asia Pacific">Asia Pacific</option>
-										<option value="EMEA">EMEA</option>
-										<option value="North America">North America</option>
-										<option value="Europe">Europe</option>
-										<option value="All">All</option>
 									</select>
 								</div>
 							</div>
@@ -68,16 +50,16 @@
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
 									<label> Current Due Date </label>
-									<datepicker date-format="dd-MM-yyyy">
-										<input type="text" name="controlEffectiveStartdate" ng-model="VM.controlEffectiveStartdate" placeholder="Due Date" class="form-control">
+									<datepicker date-format="{{app.Config.DateFormat}}">
+										<input type="text" name="testDueDate" ng-model="VM.testDueDate" placeholder="Due Date" class="form-control">
 									</datepicker>
 								</div>
 							</div>
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
 									<label> Test Completed Date </label>
-									<datepicker date-format="dd-MM-yyyy">
-										<input type="text" name="controlEffectiveEnddate" ng-model="VM.controlEffectiveEnddate" placeholder="Due Date" class="form-control">
+									<datepicker date-format="{{app.Config.DateFormat}}">
+										<input type="text" name="testCompletedDate" ng-model="VM.testCompletedDate" placeholder="Due Date" class="form-control">
 									</datepicker>
 								</div>
 							</div>
@@ -86,24 +68,19 @@
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
 									<label> Test Results </label>
-									<select name="controlCategory" ng-model="VM.controlCategory" class="form-control">
+									<select name="testResults" ng-model="VM.testResults" ng-options="tr.val as tr.key for tr in app.Lookup.LIST015" class="form-control">
 										<option value="">Select</option>
-										<option value="Controls failed" >Controls failed</option>
-										<option value="Controls partially failed" >Controls partially failed</option>
-										<option value="Controls need further data">Controls need further data</option>
-										<option value="Controls pending testing">Controls pending testing</option>
-										<option value="Controls not tested" >Controls not tested</option>
-										<option value="Controls success" >Controls success</option>
-										<option value="Controls successfully tested" >Controls successfully tested</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
 									<label> Files to upload </label>
-									<input type="file" file-model="VM.filemodel" multiple class="form-control" />
-									<ul class="file-list-group col-xs-12">
-										<li class="file-list-item" ng-repeat="file in VM.filemodel"> <i class="fa fa-file"></i> {{file.name}}</li>
+									<input type="file" file-model="VM.testresultFileModel" multiple class="form-control" />
+									<ul class="file-list-group col-xs-12 col-md-10">
+										<li class="file-list-item" ng-repeat="file in VM.testresultFileModel">
+											<a class="file-link"><i class="fa fa-file"></i> {{file.name}}</a>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -129,9 +106,9 @@
 						</div>
 						<hr class="hrule4" />
 						<div class="col-xs-12 text-right">
-							<button class="btn btn-squared btn-dark-blue" ng-disabled="Form.TestPlan.$invalid" type="submit"><i class="fa fa-save"></i> Save</button>
+							<button class="btn btn-squared btn-dark-blue" ng-disabled="Form.TestResult.$invalid || !Form.TestResult.$dirty" type="submit"><i class="fa fa-save"></i> Save</button>
 							<button class="btn btn-squared btn-dark-blue" type="reset"><i class="fa fa-refresh"></i> Reset</button>
-							<button class="btn btn-squared btn-dark-blue" ng-click="cancelAction()"><i class="fa fa-times"></i>  Cancel</button>
+							<button class="btn btn-squared btn-dark-blue" type="button" ng-click="cancelAction()"><i class="fa fa-times"></i>  Cancel</button>
 						</div>
 					</form>
 				</div>

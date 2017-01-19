@@ -28,6 +28,9 @@ function ($rootScope, $state, $stateParams) {
             theme: 'theme-1',
             logo: 'assets/img/logo.png',
         },
+        Config: {
+            DateFormat: 'MM-dd-yyyy'
+        },
         IsAuthenticated: false,
         APIPrefix: "http://52.90.105.84/api/2/",
         Debug: true,

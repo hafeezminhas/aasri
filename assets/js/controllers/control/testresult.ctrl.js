@@ -36,8 +36,9 @@
             var confirmation = Utils.CreateConfirmModal("Confirm Deletion", "Are u sure you want to delete the seleced item?", "Yes", "No");
             confirmation.result.then(function () {
                 $rootScope.app.Mask = true;
-                ControlService.DeleteTestResults(r.id).then(function(data){
-                    if(data.status===200) loadRepos();
+                console.log(r);
+                ControlService.DeleteTestResults(r.id).then(function(res){
+                    if(res.status===200) loadTestResults();
                 });
             }, function(){ $rootScope.app.Mask = false; });
         };
@@ -46,9 +47,9 @@
             ControlService.GetTestResults($scope.PerPage, $scope.CurrPage || 1).then(function (data) {
                 $scope.TestResults = [];
                 data.forEach(function(tr){
-                    tr.dueDate = new Date(tr.testDueDate);
-                    tr.testCompletedDate = new Date(tr.testCompletedDate);
-                    tr.deptName = tr.department[0].departmentName;
+                    if(tr.testDueDate) tr.dueDate = new Date(tr.testDueDate);
+                    if(tr.testCompletedDate) tr.testCompletedDate = new Date(tr.testCompletedDate);
+                    if(tr.department.length) tr.deptName = tr.department[0].departmentName;
                 });
                 $scope.TestResults = data;
                 $rootScope.app.Mask = false;

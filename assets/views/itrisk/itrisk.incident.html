@@ -39,7 +39,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-white no-radius">
 				<div class="panel-heading">
-					<h5>Operation Risk Incident</h5>
+					<h5>IT Risk Incident</h5>
 					<div class="panel-tools">
 						<a class="btn btn-xs btn-dark-blue btn-squared" ui-sref="app.itrisk.incident.form">Add Incident</a>
 					</div>
@@ -64,10 +64,10 @@
 							<tr class="sortable-headers">
 								<th><input type="checkbox"></th>
 								<th><a ng-class="{'text-azure': CurrCol==='riskName' }" ng-click="sortMe('rcsa_name')"><i class="fa {{resSort('riskName')}}"></i> Name</a></th>
-								<th><a ng-class="{'text-azure': CurrCol==='IDate' }" ng-click="sortMe('IDate')"><i class="fa {{resSort('IDate')}}"></i> Modified On</a></th>
+								<th><a ng-class="{'text-azure': CurrCol==='identifiedDate' }" ng-click="sortMe('identifiedDate')"><i class="fa {{resSort('identifiedDate')}}"></i> Identified Date</a></th>
 								<th><a ng-class="{'text-azure': CurrCol==='riskSeverity' }" ng-click="sortMe('riskSeverity')"><i class="fa {{resSort('riskSeverity')}}"></i> Severity</a></th>
 								<th><a ng-class="{'text-azure': CurrCol==='riskStatus' }" ng-click="sortMe('riskStatus')"><i class="fa {{resSort('riskStatus')}}"></i> Status</a></th>
-								<th><a ng-class="{'text-azure': CurrCol==='riskCategory' }" ng-click="sortMe('riskCategory')"><i class="fa {{resSort('riskCategory')}}"></i> RiskCategory</a></th>
+								<th><a ng-class="{'text-azure': CurrCol==='riskCategory' }" ng-click="sortMe('riskCategory')"><i class="fa {{resSort('riskCategory')}}"></i> Category</a></th>
 								<th>Action</th>
 							</tr>
 							</thead>
@@ -75,7 +75,7 @@
 							<tr ng-repeat="r in Incidents | orderBy: CurrCol:IsAsc | filter: CurrFilt">
 								<th><input type="checkbox"></th>
 								<td>{{r.riskName}}</td>
-								<td>{{r.IDate | date}}</td>
+								<td>{{r.identifiedDate | date}}</td>
 								<td>{{r.riskSeverity}}</td>
 								<td>{{r.riskStatus}}</td>
 								<td>{{r.riskCategory}}</td>

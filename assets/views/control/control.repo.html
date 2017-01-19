@@ -16,7 +16,7 @@
 			<div class="panel panel-white no-radius">
 				<div class="panel-heading">
 					<div class="panel-tools">
-						<a class="btn btn-xs btn-dark-blue btn-squared"><i class="ti-download"></i> Download</a>
+						<a ng-click="exportTable()" class="btn btn-xs btn-dark-blue btn-squared"><i class="ti-download"></i> Download</a>
 						<a class="btn btn-xs btn-dark-blue btn-squared" ui-sref="app.control.repo.form"><i class="ti-plus"></i> Add</a>
 					</div>
 				</div>
@@ -38,7 +38,7 @@
 						<table class="table table-striped table-responsive col-xs-12">
 							<thead>
 							<tr class="sortable-headers">
-								<th><input type="checkbox"></th>
+								<th><input type="checkbox" ng-click="selectAll()" ng-model="CheckAll"></th>
 								<th><a ng-class="{'text-azure': CurrCol==='riskName' }" ng-click="sortMe('rcsa_name')"><i class="fa {{resSort('riskName')}}"></i> Control Source</a></th>
 								<th><a ng-class="{'text-azure': CurrCol==='IDate' }" ng-click="sortMe('IDate')"><i class="fa {{resSort('IDate')}}"></i> Control Category</a></th>
 								<th><a ng-class="{'text-azure': CurrCol==='riskSeverity' }" ng-click="sortMe('riskSeverity')"><i class="fa {{resSort('riskSeverity')}}"></i> Control Name</a></th>
@@ -51,7 +51,7 @@
 							</thead>
 							<tbody>
 							<tr ng-repeat="r in Repos | orderBy: CurrCol:IsAsc | filter: CurrFilt">
-								<th><input type="checkbox"></th>
+								<th><input type="checkbox" ng-model="CheckList[$index]"></th>
 								<td>{{r.controlSource}}</td>
 								<td>{{r.controlCategory}}</td>
 								<td>{{r.controlName}}</td>

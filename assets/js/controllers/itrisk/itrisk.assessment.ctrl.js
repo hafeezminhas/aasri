@@ -4,7 +4,7 @@
 
     function ITRiskAssController ($scope, $rootScope, $state, $uibModal, $filter, ITRiskService, ChartFactory, Utils){
        $scope.mainTitle = $state.current.title;
-       $scope.mainDesc = "RISK CONTROL SELF ASSESSMENTS";
+       $scope.mainDesc = "";
 
         $scope.CurrCol = 'riskName';
         $scope.IsAsc = true;

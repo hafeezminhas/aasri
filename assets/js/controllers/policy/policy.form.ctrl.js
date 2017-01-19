@@ -24,13 +24,13 @@
             if($scope.Form.Policy.$pristine || $scope.Form.Policy.$invalid) return false;
 
             PolicyService.AddPolicy($scope.VM).then(function(res){
-                if(res.status === 200) $state.go('app.policy');
+                if(res.status === 200) $state.go('app.policy.main');
             });
         };
 
         $scope.cancelAction = function(){
             console.log($scope.Form.Policy.$pristine);
-            $state.go('app.policy');
+            $state.go('app.policy.main');
         };
 
         $rootScope.app.Mask = false;

@@ -38,7 +38,7 @@
           deferred.reject(err);
       });
       return deferred.promise;
-    };
+    };78
 
     APIHandler.prototype.PostWithFile = function get(url, params) {
           url = baseUrl + url;
@@ -50,7 +50,8 @@
               url: url,
               data: params,
               headers: {
-                  'Content-Type': undefined
+                  transformRequest: angular.identity,
+                  'Content-Type': 'application/octet-stream'
               }
           });
           var deferred = $q.defer();
